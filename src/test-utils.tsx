@@ -6,8 +6,18 @@ import {
   RenderResult,
   configure,
 } from "@testing-library/react";
+import { QueryClient } from "@tanstack/react-query";
+import { testQueryClientConfig } from "core/api/api.config";
+import { ApiProvider } from "core/api";
 
 configure({ throwSuggestions: true });
+
+// React Query Config
+const queryClient = new QueryClient(testQueryClientConfig);
+// Due to React Query caching calls, we need to clear this cache.
+beforeEach(() => {
+  queryClient.clear();
+});
 
 type RenderProps = (
   ui: React.ReactElement,
@@ -15,7 +25,7 @@ type RenderProps = (
 ) => RenderResult;
 
 const WrapperProviders = ({ children }: { children: React.ReactNode }) => (
-  <>{children}</>
+  <ApiProvider queryClient={queryClient}>{children}</ApiProvider>
 );
 
 const customRender: RenderProps = (ui, renderOptions) =>

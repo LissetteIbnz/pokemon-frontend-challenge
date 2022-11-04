@@ -1,10 +1,16 @@
+import { ApiProvider } from "core/api";
+import { RouterProvider } from "core/router";
+
 function App() {
   return (
-    <div>
-      <header>
-        <p>Pokemon API</p>
-      </header>
-    </div>
+    <ApiProvider>
+      <div>
+        <header>
+          <p>Pokemon API</p>
+        </header>
+        <RouterProvider />
+      </div>
+    </ApiProvider>
   );
 }
 
