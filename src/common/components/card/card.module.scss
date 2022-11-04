@@ -1,0 +1,9 @@
+@use "assets/scss/colors" as *;
+
+.card {
+  border: 1px solid $border;
+  display: flex;
+  flex-direction: column;
+  height: 18rem;
+  width: 13rem;
+}
