@@ -7,11 +7,11 @@ interface ApiProviderProps {
   queryClient?: QueryClient;
 }
 
-export function ApiProvider({
+export const ApiProvider = ({
   children,
   queryClient = defaultQueryClient,
-}: ApiProviderProps) {
+}: ApiProviderProps) => {
   return (
     <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
   );
-}
+};
