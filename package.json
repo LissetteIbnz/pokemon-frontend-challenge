@@ -17,9 +17,11 @@
   },
   "dependencies": {
     "@tanstack/react-query": "^4.14.3",
+    "@tanstack/react-virtual": "^3.0.0-alpha.0",
     "classnames": "^2.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-intersection-observer": "^9.4.0",
     "react-router-dom": "^6.4.3",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
@@ -42,6 +44,9 @@
     "@types/node": "^16.18.3",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.8",
+    "@types/react-virtualized-auto-sizer": "^1.0.1",
+    "@types/react-window": "^1.8.5",
+    "@types/react-window-infinite-loader": "^1.0.6",
     "babel-plugin-named-exports-order": "^0.0.2",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
