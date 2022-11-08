@@ -6,6 +6,6 @@ interface CardProps {
   className?: string;
 }
 
-export function Card({ children, className }: CardProps) {
+export const Card = ({ children, className }: CardProps) => {
   return <div className={cx(styles.card, className)}>{children}</div>;
-}
+};

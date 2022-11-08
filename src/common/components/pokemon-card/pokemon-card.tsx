@@ -1,3 +1,4 @@
+import * as React from "react";
 import { Card } from "../card";
 import { HeartButton } from "../heart-button";
 import styles from "./pokemon-card.module.scss";
@@ -11,17 +12,17 @@ export interface PokemonCardProps {
   title: string;
 }
 
-export function PokemonCard({
+export const PokemonCard = ({
   description,
   imageUrl,
   isFavorite,
   onFavorite,
   title,
   className,
-}: PokemonCardProps) {
+}: PokemonCardProps) => {
   return (
     <Card className={className}>
-      <img className={styles.media} alt={title} src={imageUrl} />
+      <img loading="lazy" className={styles.media} alt={title} src={imageUrl} />
       <div className={styles.description}>
         <hgroup>
           <h2>{title}</h2>
@@ -31,4 +32,4 @@ export function PokemonCard({
       </div>
     </Card>
   );
-}
+};

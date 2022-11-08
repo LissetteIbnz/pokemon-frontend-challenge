@@ -1,8 +1,17 @@
 @use "assets/scss/colors" as *;
 
 .media {
+  max-width: 100%;
+  aspect-ratio: 1;
+  height: auto;
   flex: 1;
-  height: 100%;
+  padding: 1rem;
+  object-fit: contain;
+  transition: transform 0.3s ease-in-out;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 }
 
 .description {

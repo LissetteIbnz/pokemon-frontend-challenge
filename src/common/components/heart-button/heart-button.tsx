@@ -6,7 +6,7 @@ export interface HeartButtonProps {
   onClick: () => void;
 }
 
-export function HeartButton({ isActive, onClick }: HeartButtonProps) {
+export const HeartButton = ({ isActive, onClick }: HeartButtonProps) => {
   const srText = isActive ? "Remove as favorite" : "Mark as favorite";
 
   return (
@@ -30,4 +30,4 @@ export function HeartButton({ isActive, onClick }: HeartButtonProps) {
       </svg>
     </button>
   );
-}
+};

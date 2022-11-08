@@ -1,5 +1,10 @@
+import { AppLayout } from "layouts";
 import { PokemonListContainer } from "pods/pokemon-list";
 
-export function PokemonListScene() {
-  return <PokemonListContainer />;
-}
+export const PokemonListScene = () => {
+  return (
+    <AppLayout>
+      <PokemonListContainer />
+    </AppLayout>
+  );
+};

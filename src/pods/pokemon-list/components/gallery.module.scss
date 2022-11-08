@@ -1,0 +1,9 @@
+$card-width: 350px;
+
+.gallery {
+  max-width: 1200px;
+  display: grid;
+  grid-gap: 1.6rem;
+  grid-template-columns: repeat(auto-fit, minmax($card-width, 1fr));
+  border: 1px solid green;
+}
