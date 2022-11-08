@@ -5,3 +5,5 @@ export interface Pokemon {
   isFavorite: boolean;
   imageUrl: string;
 }
+
+export type Filters = "all" | "favorites";

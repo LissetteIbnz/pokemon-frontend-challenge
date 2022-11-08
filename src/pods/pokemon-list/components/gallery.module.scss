@@ -1,9 +1,9 @@
-$card-width: 350px;
+$card-width: 250px;
 
 .gallery {
-  max-width: 1200px;
+  align-self: stretch;
+  padding-inline: 1rem;
   display: grid;
-  grid-gap: 1.6rem;
+  grid-gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax($card-width, 1fr));
-  border: 1px solid green;
 }

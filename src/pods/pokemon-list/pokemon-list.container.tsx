@@ -2,6 +2,7 @@ import * as React from "react";
 import { useInView } from "react-intersection-observer";
 import { PokemonListComponent } from "./pokemon.component";
 import { usePokemonList } from "./pokemon-list.hook";
+import { Filters } from "./pokemon-list.vm";
 
 export const PokemonListContainer = () => {
   const { ref, inView } = useInView();
@@ -15,6 +16,10 @@ export const PokemonListContainer = () => {
     }
   }, [inView]);
 
+  const handleFilterClick = (filter: Filters) => {
+    console.log(filter);
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -25,7 +30,11 @@ export const PokemonListContainer = () => {
 
   return (
     <>
-      <PokemonListComponent onFavoriteClick={() => undefined} pokemons={pokemons} />
+      <PokemonListComponent
+        onFilterClick={handleFilterClick}
+        onFavoriteClick={() => undefined}
+        pokemons={pokemons}
+      />
 
       <div>
         <button

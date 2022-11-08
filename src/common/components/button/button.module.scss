@@ -1,0 +1,21 @@
+@use "assets/scss/colors" as *;
+
+.button {
+  font-size: 1rem;
+  border: 1px solid $primary;
+  padding: 1rem;
+  width: 100%;
+  transition: all 0.2s ease-in;
+  cursor: pointer;
+  font-size: 1.1rem;
+
+  &--primary {
+    background: $primary;
+    color: $white;
+  }
+
+  &--secondary {
+    background: $white;
+    color: $primary;
+  }
+}
