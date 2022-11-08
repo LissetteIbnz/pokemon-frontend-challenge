@@ -8,9 +8,7 @@ export default {
   component: PokemonCard,
 } as ComponentMeta<PokemonCardComponent>;
 
-const Template: ComponentStory<PokemonCardComponent> = (args) => (
-  <PokemonCard {...args} />
-);
+const Template: ComponentStory<PokemonCardComponent> = (args) => <PokemonCard {...args} />;
 
 export const Default = Template.bind({});
 

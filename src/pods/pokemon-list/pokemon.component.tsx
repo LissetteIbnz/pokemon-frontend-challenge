@@ -7,10 +7,7 @@ interface PokemonListComponentProps {
   onFavoriteClick: (pokemonId: Pokemon["id"]) => void;
 }
 
-export const PokemonListComponent = ({
-  onFavoriteClick,
-  pokemons,
-}: PokemonListComponentProps) => {
+export const PokemonListComponent = ({ onFavoriteClick, pokemons }: PokemonListComponentProps) => {
   return (
     <Gallery>
       {pokemons.map(({ id, isFavorite, name, types, imageUrl }) => (

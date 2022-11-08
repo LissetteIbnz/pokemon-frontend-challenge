@@ -6,14 +6,8 @@ import { usePokemonList } from "./pokemon-list.hook";
 export const PokemonListContainer = () => {
   const { ref, inView } = useInView();
 
-  const {
-    fetchNextPage,
-    hasNextPage,
-    isError,
-    isFetchingNextPage,
-    isLoading,
-    pokemons,
-  } = usePokemonList();
+  const { fetchNextPage, hasNextPage, isError, isFetchingNextPage, isLoading, pokemons } =
+    usePokemonList();
 
   React.useEffect(() => {
     if (inView) {
@@ -31,10 +25,7 @@ export const PokemonListContainer = () => {
 
   return (
     <>
-      <PokemonListComponent
-        onFavoriteClick={() => undefined}
-        pokemons={pokemons}
-      />
+      <PokemonListComponent onFavoriteClick={() => undefined} pokemons={pokemons} />
 
       <div>
         <button

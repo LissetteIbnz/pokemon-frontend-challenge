@@ -1,11 +1,5 @@
 import * as React from "react";
-import {
-  fireEvent,
-  render,
-  RenderOptions,
-  RenderResult,
-  configure,
-} from "@testing-library/react";
+import { fireEvent, render, RenderOptions, RenderResult, configure } from "@testing-library/react";
 import { QueryClient } from "@tanstack/react-query";
 import { testQueryClientConfig } from "core/api/api.config";
 import { ApiProvider } from "core/api";
@@ -37,7 +31,5 @@ export * from "@testing-library/react";
 // override render method
 export { customRender as render };
 
-export const changeInput = (
-  input: HTMLInputElement | HTMLTextAreaElement,
-  value: string
-) => fireEvent.change(input, { target: { value } });
+export const changeInput = (input: HTMLInputElement | HTMLTextAreaElement, value: string) =>
+  fireEvent.change(input, { target: { value } });

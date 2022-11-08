@@ -24,17 +24,13 @@ describe("<HeartButton />", () => {
     props.isActive = false;
     render(<HeartButton {...props} />);
 
-    expect(
-      screen.getByRole("button", { name: /mark as favorite/i })
-    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /mark as favorite/i })).toBeInTheDocument();
   });
 
   it("should display 'Remove as favorite' when is active", () => {
     props.isActive = true;
     render(<HeartButton {...props} />);
 
-    expect(
-      screen.getByRole("button", { name: /remove as favorite/i })
-    ).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /remove as favorite/i })).toBeInTheDocument();
   });
 });

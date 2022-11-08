@@ -7,15 +7,13 @@ describe("Pokemon repository", () => {
   let fetchMock: unknown;
 
   beforeEach(() => {
-    fetchMock = jest
-      .spyOn(global, "fetch")
-      .mockImplementation(
-        () =>
-          Promise.resolve({
-            ok: true,
-            json: () => Promise.resolve([]),
-          }) as Promise<Response>
-      );
+    fetchMock = jest.spyOn(global, "fetch").mockImplementation(
+      () =>
+        Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve([]),
+        }) as Promise<Response>
+    );
   });
 
   it("should call the pokemon endpoint", async () => {

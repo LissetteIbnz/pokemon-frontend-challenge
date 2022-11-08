@@ -17,9 +17,7 @@ describe("<PokemonCard />", () => {
   it("should render a title", () => {
     render(<PokemonCard {...props} />);
 
-    expect(
-      screen.getByRole("heading", { name: props.title })
-    ).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: props.title })).toBeInTheDocument();
   });
 
   it("should render a description", () => {
