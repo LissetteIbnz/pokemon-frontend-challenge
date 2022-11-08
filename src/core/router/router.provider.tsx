@@ -13,6 +13,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-export function RouterProvider() {
+export const RouterProvider = () => {
   return <ReactRouterProvider router={router} />;
-}
+};
