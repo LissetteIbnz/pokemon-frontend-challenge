@@ -1,8 +1,10 @@
-export const ROUTES = {
-  ROOT: "/",
-  NOT_FOUND: "/404",
+export const routes = {
+  root: "/",
+  details: "details",
+  detailsById: (pokemonId: string) => `${routes.details}/${pokemonId}`,
+  notFound: "/404",
 } as const;
 
-export type Routes = typeof ROUTES;
+export type Routes = typeof routes;
 
-export type TypeRoutes = typeof ROUTES[keyof typeof ROUTES];
+export type TypeRoutes = typeof routes[keyof typeof routes];

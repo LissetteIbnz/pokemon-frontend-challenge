@@ -4,6 +4,7 @@ import { ViewFilter, Pokemon, TypeOption } from "./pokemon-list.vm";
 
 interface PokemonListComponentProps {
   onFavoriteClick: (pokemonId: Pokemon["id"]) => void;
+  onPokemonClick: (pokemonId: Pokemon["id"]) => void;
   onSearchChange: (search: string) => void;
   onTypeFilterChange: (typeFilter: string) => void;
   onViewFilterChange: (viewFilter: ViewFilter) => void;
@@ -16,6 +17,7 @@ interface PokemonListComponentProps {
 
 export const PokemonListComponent = ({
   onFavoriteClick,
+  onPokemonClick,
   onSearchChange,
   onTypeFilterChange,
   onViewFilterChange,
@@ -42,9 +44,10 @@ export const PokemonListComponent = ({
             description={types}
             imageUrl={imageUrl}
             isFavorite={isFavorite}
+            key={id}
+            onClick={() => onPokemonClick(id)}
             onFavorite={() => onFavoriteClick(id)}
             title={name}
-            key={id}
           />
         ))}
       </Gallery>

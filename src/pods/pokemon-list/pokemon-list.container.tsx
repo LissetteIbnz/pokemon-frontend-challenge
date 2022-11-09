@@ -2,8 +2,12 @@ import * as React from "react";
 import { useInView } from "react-intersection-observer";
 import { PokemonListComponent } from "./pokemon.component";
 import { usePokemonList, usePokemonTypes } from "./pokemon-list.hook";
+import { useNavigate } from "react-router-dom";
+import { Pokemon } from "./pokemon-list.vm";
+import { routes } from "core/router/routes";
 
 export const PokemonListContainer = () => {
+  const navigate = useNavigate();
   const { ref, inView } = useInView();
 
   const { pokemonTypes } = usePokemonTypes();
@@ -28,6 +32,10 @@ export const PokemonListContainer = () => {
     }
   }, [inView]);
 
+  const handleNavigateDetails = (pokemonId: Pokemon["id"]) => {
+    navigate(routes.detailsById(pokemonId));
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -39,6 +47,7 @@ export const PokemonListContainer = () => {
   return (
     <>
       <PokemonListComponent
+        onPokemonClick={handleNavigateDetails}
         onViewFilterChange={onViewFilterChange}
         onFavoriteClick={() => undefined}
         onSearchChange={onSearchChange}

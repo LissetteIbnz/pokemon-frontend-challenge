@@ -1,10 +1,10 @@
 import { ApiProvider } from "core/api";
-import { RouterProvider } from "core/router";
+import { RouterComponent } from "core/router";
 
 function App() {
   return (
     <ApiProvider>
-      <RouterProvider />
+      <RouterComponent />
     </ApiProvider>
   );
 }

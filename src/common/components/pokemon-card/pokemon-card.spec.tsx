@@ -11,6 +11,7 @@ describe("<PokemonCard />", () => {
       isFavorite: false,
       title: "Title",
       onFavorite: jest.fn(),
+      onClick: jest.fn(),
     };
   });
 
@@ -39,5 +40,14 @@ describe("<PokemonCard />", () => {
     fireEvent.click(favoriteButton);
 
     expect(props.onFavorite).toBeCalled();
+  });
+
+  it("should call 'onClick' when a user clicks on the card", () => {
+    render(<PokemonCard {...props} />);
+
+    const card = screen.getByRole("img");
+    fireEvent.click(card);
+
+    expect(props.onClick).toBeCalled();
   });
 });

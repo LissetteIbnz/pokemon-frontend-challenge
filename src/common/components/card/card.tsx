@@ -1,11 +1,8 @@
 import cx from "classnames";
 import styles from "./card.module.scss";
 
-interface CardProps {
-  children: React.ReactNode;
-  className?: string;
-}
+type CardProps = React.HTMLAttributes<HTMLDivElement>;
 
-export const Card = ({ children, className }: CardProps) => {
-  return <div className={cx(styles.card, className)}>{children}</div>;
+export const Card = ({ className, ...props }: CardProps) => {
+  return <div {...props} className={cx(styles.card, className)} />;
 };

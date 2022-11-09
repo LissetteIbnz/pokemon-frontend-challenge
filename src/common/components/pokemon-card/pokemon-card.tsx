@@ -9,6 +9,7 @@ export interface PokemonCardProps {
   imageUrl: string;
   isFavorite: boolean;
   onFavorite: () => void;
+  onClick: () => void;
   title: string;
 }
 
@@ -17,11 +18,12 @@ export const PokemonCard = ({
   imageUrl,
   isFavorite,
   onFavorite,
+  onClick,
   title,
   className,
 }: PokemonCardProps) => {
   return (
-    <Card className={cx(styles.container, className)}>
+    <Card className={cx(styles.container, className)} onClick={onClick}>
       <img loading="lazy" className={styles.media} alt={title} src={imageUrl} />
       <div className={styles.description}>
         <hgroup>
