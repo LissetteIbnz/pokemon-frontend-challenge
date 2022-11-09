@@ -1,20 +1,21 @@
+import { buildURLSearchParams } from "common/helpers";
 import { PaginateDTO, PaginateParamsDTO, PokemonDTO } from "infra/dto";
 import { http } from "infra/http";
 
-const END_POINT = "/pokemon/";
-
 const getAll = async (data?: PaginateParamsDTO) => {
-  const queryParams = new URLSearchParams();
-  if (data) {
-    Object.entries(data).forEach(([key, value]) => {
-      queryParams.append(key, value.toString());
-    });
-  }
+  const END_POINT = "/pokemon/";
+  const queryParams = buildURLSearchParams(data);
   const path = `${END_POINT}?${queryParams.toString()}`;
   const response = await http.get<PaginateDTO<PokemonDTO>>(path);
   return response;
 };
 
+const getTypes = async () => {
+  const path = "/pokemon-types";
+  return http.get<string[]>(path);
+};
+
 export const pokemonRepository = {
   getAll,
+  getTypes,
 };

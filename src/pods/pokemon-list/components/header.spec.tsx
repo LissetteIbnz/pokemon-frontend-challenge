@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from "test-utils";
+import { render, screen, fireEvent, changeInput } from "test-utils";
 import { Header, HeaderProps } from "./header";
 
 describe("<Header />", () => {
@@ -8,6 +8,16 @@ describe("<Header />", () => {
     props = {
       onAllClick: jest.fn(),
       onFavoritesClick: jest.fn(),
+      onSearchChange: jest.fn(),
+      searchTerm: "",
+      onTypeSelect: jest.fn(),
+      typeOptions: [
+        {
+          label: "Label 1",
+          value: "value-1",
+        },
+      ],
+      selectedType: "",
     };
   });
 
@@ -29,5 +39,16 @@ describe("<Header />", () => {
 
     fireEvent.click(favoritesButton);
     expect(props.onFavoritesClick).toHaveBeenCalled();
+  });
+
+  it("should call 'onSearchChange' when a user types on Search input", () => {
+    const expectedSearch = "test";
+
+    render(<Header {...props} />);
+
+    const searchInput: HTMLInputElement = screen.getByRole("textbox");
+    changeInput(searchInput, expectedSearch);
+
+    expect(props.onSearchChange).toHaveBeenCalledWith(expectedSearch);
   });
 });

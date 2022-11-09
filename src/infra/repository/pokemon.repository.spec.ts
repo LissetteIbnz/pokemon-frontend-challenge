@@ -16,31 +16,46 @@ describe("Pokemon repository", () => {
     );
   });
 
-  it("should call the pokemon endpoint", async () => {
-    await pokemonRepository.getAll();
+  describe("getAll", () => {
+    it("should call the pokemon endpoint", async () => {
+      await pokemonRepository.getAll();
 
-    expect(fetchMock).toHaveBeenCalledWith(
-      expect.objectContaining({
-        method: "GET",
-        url: `${baseURL}/pokemon/?`,
-      })
-    );
-  });
-
-  it("should call the pokemon endpoint with query params", async () => {
-    await pokemonRepository.getAll({
-      offset: 2,
-      limit: 10,
-      isFavorite: true,
-      search: "irrelevant",
-      type: "type-1",
+      expect(fetchMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          method: "GET",
+          url: `${baseURL}/pokemon/?`,
+        })
+      );
     });
 
-    expect(fetchMock).toHaveBeenCalledWith(
-      expect.objectContaining({
-        method: "GET",
-        url: `${baseURL}/pokemon/?offset=2&limit=10&isFavorite=true&search=irrelevant&type=type-1`,
-      })
-    );
+    it("should call the pokemon endpoint with query params", async () => {
+      await pokemonRepository.getAll({
+        offset: 2,
+        limit: 10,
+        isFavorite: true,
+        search: "irrelevant",
+        type: "type-1",
+      });
+
+      expect(fetchMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          method: "GET",
+          url: `${baseURL}/pokemon/?offset=2&limit=10&search=irrelevant&type=type-1`,
+        })
+      );
+    });
+  });
+
+  describe("getTypes", () => {
+    it("should call the pokemon types endpoint", async () => {
+      await pokemonRepository.getTypes();
+
+      expect(fetchMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          method: "GET",
+          url: `${baseURL}/pokemon-types`,
+        })
+      );
+    });
   });
 });

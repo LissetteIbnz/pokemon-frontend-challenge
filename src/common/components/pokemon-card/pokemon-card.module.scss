@@ -1,5 +1,9 @@
 @use "assets/scss/colors" as *;
 
+.container {
+  max-width: 300px;
+}
+
 .media {
   max-width: 100%;
   aspect-ratio: 1;

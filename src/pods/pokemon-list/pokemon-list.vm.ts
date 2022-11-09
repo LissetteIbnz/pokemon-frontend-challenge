@@ -1,3 +1,5 @@
+import { SelectProps } from "common/components";
+
 export interface Pokemon {
   id: string;
   name: string;
@@ -6,4 +8,12 @@ export interface Pokemon {
   imageUrl: string;
 }
 
+export type QueryFilters = {
+  offset: number;
+  search: string;
+  type: string;
+};
+
 export type Filters = "all" | "favorites";
+
+export type TypeOption = SelectProps["options"][number];

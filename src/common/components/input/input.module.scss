@@ -1,0 +1,12 @@
+@use "assets/scss/colors" as *;
+
+.input {
+  background: $layer-01;
+  border: 1px solid $layer-01;
+  padding: 8px 1rem;
+  transition: all 100ms;
+
+  &:hover {
+    border-color: $border-hover;
+  }
+}

@@ -1,4 +1,4 @@
-import { formatterList, isNullOrUndefined } from "./helpers";
+import { formatterList, isNullOrUndefined, buildURLSearchParams } from "./helpers";
 
 describe("Helpers", () => {
   describe("formatterList", () => {
@@ -33,5 +33,27 @@ describe("Helpers", () => {
         expect(result).toEqual(expected);
       }
     );
+  });
+
+  describe("buildURLSearchParams", () => {
+    const tableCases = [null, undefined, {}];
+    it.each(tableCases)("should build an URL Search Params when passes %p", (testValue) => {
+      // @ts-ignore - Proposal tests.
+      const result = buildURLSearchParams(testValue);
+      expect(result.toString()).toBe("");
+    });
+
+    it("should build a correct URL Search Params with different types", () => {
+      const data = {
+        name: "name",
+        age: 24,
+        isActive: true,
+        types: ["type-1", "type-2"],
+        ignoreMe: undefined,
+        ignoreMeToo: "",
+      };
+      const result = buildURLSearchParams(data);
+      expect(result.toString()).toBe("name=name&age=24&types=type-1%2Ctype-2");
+    });
   });
 });

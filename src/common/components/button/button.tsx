@@ -3,9 +3,17 @@ import styles from "./button.module.scss";
 
 type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
   variant?: "primary" | "secondary";
+  onlyIcon?: boolean;
+  isBlock?: boolean;
 };
 
-export const Button = ({ className, variant = "primary", ...props }: ButtonProps) => {
+export const Button = ({
+  className,
+  variant = "primary",
+  isBlock,
+  onlyIcon,
+  ...props
+}: ButtonProps) => {
   const isPrimary = variant === "primary";
   const isSecondary = variant === "secondary";
 
@@ -17,6 +25,9 @@ export const Button = ({ className, variant = "primary", ...props }: ButtonProps
         {
           [styles["button--primary"]]: isPrimary,
           [styles["button--secondary"]]: isSecondary,
+          [styles["button--block"]]: isBlock,
+          [styles["button--icon"]]: onlyIcon,
+          [styles["button--tertiary"]]: onlyIcon,
         },
         className
       )}

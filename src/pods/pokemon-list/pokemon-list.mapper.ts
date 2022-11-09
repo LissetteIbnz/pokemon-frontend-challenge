@@ -1,6 +1,6 @@
 import { formatterList } from "common/helpers";
 import { PokemonDTO } from "infra/dto";
-import { Pokemon } from "./pokemon-list.vm";
+import { Pokemon, TypeOption } from "./pokemon-list.vm";
 
 export const mapPokemonAmToVm = (pokemon: PokemonDTO): Pokemon => {
   const typesList = formatterList(pokemon.types);
@@ -11,5 +11,12 @@ export const mapPokemonAmToVm = (pokemon: PokemonDTO): Pokemon => {
     isFavorite: pokemon.isFavorite,
     name: pokemon.name,
     types: typesList,
+  };
+};
+
+export const mapPokemonTypeAmToVm = (type: string): TypeOption => {
+  return {
+    label: type,
+    value: type,
   };
 };

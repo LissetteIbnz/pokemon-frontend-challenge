@@ -1,12 +1,15 @@
 import { pokemonRepository } from "infra/repository";
-import { mapPokemonAmToVm } from "./pokemon-list.mapper";
+import { mapPokemonAmToVm, mapPokemonTypeAmToVm } from "./pokemon-list.mapper";
+import { QueryFilters } from "./pokemon-list.vm";
 
-export const getPaginatedPokemons = async (offset: number) => {
+export const getPaginatedPokemons = async ({ offset, search, type }: QueryFilters) => {
   const PAGE_SIZE = 10;
 
   const response = await pokemonRepository.getAll({
     limit: PAGE_SIZE,
     offset,
+    search,
+    type,
   });
 
   const totalItems = response.count;
@@ -16,4 +19,9 @@ export const getPaginatedPokemons = async (offset: number) => {
     items: response.items.map(mapPokemonAmToVm),
     nextOffset: totalItems > nextOffset ? nextOffset : undefined,
   };
+};
+
+export const getPokemonsTypes = async () => {
+  const response = await pokemonRepository.getTypes();
+  return response.map(mapPokemonTypeAmToVm);
 };

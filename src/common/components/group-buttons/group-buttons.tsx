@@ -26,7 +26,7 @@ export const GroupButtons = ({ buttons, defaultSelectedIndex = 0 }: GroupButtons
         const isSelected = selectedIndexButton === index;
         const variant = isSelected ? "primary" : "secondary";
         return (
-          <Button key={title} onClick={() => handleClick(index)} variant={variant}>
+          <Button isBlock={true} key={title} onClick={() => handleClick(index)} variant={variant}>
             {title}
           </Button>
         );

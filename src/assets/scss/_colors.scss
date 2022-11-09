@@ -2,5 +2,13 @@ $primary: green;
 $white: #ffffff;
 
 $border: #e0e0e0;
+$border-hover: hsl(0, 0%, 70%);
+
 $background: #ffffff;
 $layer-01: #f4f4f4;
+
+:export {
+  primary: $primary;
+  border-hover: $border-hover;
+  layer-01: $layer-01;
+}

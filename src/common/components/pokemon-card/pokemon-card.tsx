@@ -1,4 +1,4 @@
-import * as React from "react";
+import cx from "classnames";
 import { Card } from "../card";
 import { HeartButton } from "../heart-button";
 import styles from "./pokemon-card.module.scss";
@@ -21,7 +21,7 @@ export const PokemonCard = ({
   className,
 }: PokemonCardProps) => {
   return (
-    <Card className={className}>
+    <Card className={cx(styles.container, className)}>
       <img loading="lazy" className={styles.media} alt={title} src={imageUrl} />
       <div className={styles.description}>
         <hgroup>
