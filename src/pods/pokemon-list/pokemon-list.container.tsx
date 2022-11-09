@@ -2,7 +2,6 @@ import * as React from "react";
 import { useInView } from "react-intersection-observer";
 import { PokemonListComponent } from "./pokemon.component";
 import { usePokemonList, usePokemonTypes } from "./pokemon-list.hook";
-import { Filters } from "./pokemon-list.vm";
 
 export const PokemonListContainer = () => {
   const { ref, inView } = useInView();
@@ -14,11 +13,13 @@ export const PokemonListContainer = () => {
     isError,
     isFetchingNextPage,
     isLoading,
-    pokemons,
     onSearchChange,
+    onTypeFilterChange,
+    onViewFilterChange,
+    pokemons,
     search,
-    onTypeChange,
-    type,
+    typeFilter,
+    viewFilter,
   } = usePokemonList();
 
   React.useEffect(() => {
@@ -26,10 +27,6 @@ export const PokemonListContainer = () => {
       fetchNextPage();
     }
   }, [inView]);
-
-  const handleFilterClick = (filter: Filters) => {
-    console.log(filter);
-  };
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -42,14 +39,15 @@ export const PokemonListContainer = () => {
   return (
     <>
       <PokemonListComponent
-        onFilterClick={handleFilterClick}
+        onViewFilterChange={onViewFilterChange}
         onFavoriteClick={() => undefined}
         onSearchChange={onSearchChange}
         search={search}
         pokemons={pokemons}
         typeOptions={pokemonTypes}
-        onTypeSelect={onTypeChange}
-        selectedType={type}
+        onTypeFilterChange={onTypeFilterChange}
+        typeFilter={typeFilter}
+        viewFilter={viewFilter}
       />
 
       <div>

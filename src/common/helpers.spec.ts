@@ -53,7 +53,7 @@ describe("Helpers", () => {
         ignoreMeToo: "",
       };
       const result = buildURLSearchParams(data);
-      expect(result.toString()).toBe("name=name&age=24&types=type-1%2Ctype-2");
+      expect(result.toString()).toBe("name=name&age=24&isActive=true&types=type-1%2Ctype-2");
     });
   });
 });

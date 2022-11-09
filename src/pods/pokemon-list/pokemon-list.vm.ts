@@ -9,11 +9,12 @@ export interface Pokemon {
 }
 
 export type QueryFilters = {
+  isFavorite?: boolean;
   offset: number;
   search: string;
   type: string;
 };
 
-export type Filters = "all" | "favorites";
+export type ViewFilter = "all" | "favorites";
 
 export type TypeOption = SelectProps["options"][number];

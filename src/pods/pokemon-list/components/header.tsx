@@ -1,7 +1,8 @@
-import { IconGrid, IconMenu } from "assets/icons";
+import * as React from "react";
 import cx from "classnames";
-import { Button, GroupButtons, Input, Select } from "common/components";
-import { TypeOption } from "../pokemon-list.vm";
+import { IconGrid, IconMenu } from "assets/icons";
+import { Button, GroupButtons, GroupButtonsProps, Input, Select } from "common/components";
+import { ViewFilter, TypeOption } from "../pokemon-list.vm";
 import styles from "./header.module.scss";
 
 const LITERALS = {
@@ -12,50 +13,55 @@ const LITERALS = {
 };
 
 export interface HeaderProps {
-  onAllClick: () => void;
   onSearchChange: (value: string) => void;
-  onFavoritesClick: () => void;
-  searchTerm: string;
-  onTypeSelect: (value: string) => void;
-  selectedType: string;
+  onTypeFilterChange: (typeFilter: string) => void;
+  onViewFilterChange: (viewFilter: ViewFilter) => void;
+  search: string;
+  typeFilter: string;
   typeOptions: TypeOption[];
+  viewFilter: ViewFilter;
 }
 
 export const Header = ({
-  onAllClick,
-  onFavoritesClick,
   onSearchChange,
-  searchTerm,
-  onTypeSelect,
-  selectedType,
+  onTypeFilterChange,
+  onViewFilterChange,
+  search,
+  typeFilter,
   typeOptions,
+  viewFilter,
 }: HeaderProps) => {
+  const viewFilterButtons = React.useMemo<GroupButtonsProps["buttons"]>(
+    () => [
+      {
+        onClick: () => onViewFilterChange("all"),
+        title: LITERALS.all,
+        isActive: viewFilter === "all",
+      },
+      {
+        onClick: () => onViewFilterChange("favorites"),
+        title: LITERALS.favorites,
+        isActive: viewFilter === "favorites",
+      },
+    ],
+    [onViewFilterChange, viewFilter]
+  );
+
   return (
     <nav className={styles.nav}>
-      <GroupButtons
-        buttons={[
-          {
-            onClick: onAllClick,
-            title: LITERALS.all,
-          },
-          {
-            onClick: onFavoritesClick,
-            title: LITERALS.favorites,
-          },
-        ]}
-      />
+      <GroupButtons buttons={viewFilterButtons} />
       <div className={cx(styles.space, styles.filters)}>
         <Input
           className={styles.search}
           placeholder={LITERALS.search}
           onChange={onSearchChange}
-          value={searchTerm}
+          value={search}
         />
         <Select
           placeholder={LITERALS.type}
-          onChange={onTypeSelect}
+          onChange={onTypeFilterChange}
           options={typeOptions}
-          value={selectedType}
+          value={typeFilter}
           className={styles.type}
         />
         <div className={styles.actions}>

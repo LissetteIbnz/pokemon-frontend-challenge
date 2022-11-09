@@ -2,22 +2,36 @@ import * as React from "react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useDebounce } from "common/hooks";
 import { getPaginatedPokemons, getPokemonsTypes } from "./pokemon-list.api";
-import { QueryFilters } from "./pokemon-list.vm";
+import { ViewFilter, QueryFilters } from "./pokemon-list.vm";
 
 export const usePokemonList = () => {
   const INITIAL_OFFSET = 0;
+  const DEBOUNCE_DELAY_MS = 500;
 
+  const [viewFilter, setViewFilter] = React.useState<ViewFilter>("all");
+  const [typeFilter, setTypeFilter] = React.useState("");
   const [search, setSearch] = React.useState("");
-  const [type, setType] = React.useState("");
-  const debouncedSearch = useDebounce<string>(search, 500);
+  const debouncedSearch = useDebounce<string>(search, DEBOUNCE_DELAY_MS);
+
+  const isFavorite = viewFilter === "favorites" || undefined;
+  const queryFilters: Omit<QueryFilters, "offset"> = {
+    isFavorite,
+    search: debouncedSearch,
+    type: typeFilter,
+  };
 
   const { isError, isLoading, data, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useInfiniteQuery(
-      ["pokemons", { search: debouncedSearch, type }],
+      ["pokemons", { ...queryFilters }],
       async ({ pageParam = INITIAL_OFFSET, queryKey }) => {
         const [_, filters] = queryKey;
-        const { type, search } = filters as QueryFilters;
-        const response = await getPaginatedPokemons({ offset: pageParam, search, type });
+        const { type, search, isFavorite } = filters as QueryFilters;
+        const response = await getPaginatedPokemons({
+          offset: pageParam,
+          search,
+          type,
+          isFavorite,
+        });
         return response;
       },
       {
@@ -25,10 +39,6 @@ export const usePokemonList = () => {
         keepPreviousData: true,
       }
     );
-
-  const handleChangeSearch = (newSearch: string) => {
-    setSearch(newSearch);
-  };
 
   const pokemons = React.useMemo(
     () => (data ? data.pages.flatMap((page) => page.items) : []),
@@ -41,11 +51,13 @@ export const usePokemonList = () => {
     isError,
     isFetchingNextPage,
     isLoading,
-    onSearchChange: handleChangeSearch,
-    onTypeChange: setType,
+    onSearchChange: setSearch,
+    onTypeFilterChange: setTypeFilter,
+    onViewFilterChange: setViewFilter,
     pokemons,
     search,
-    type,
+    typeFilter,
+    viewFilter,
   };
 };
 

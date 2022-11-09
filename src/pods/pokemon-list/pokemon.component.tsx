@@ -1,38 +1,40 @@
 import { PokemonCard } from "common/components";
 import { Gallery, Header } from "./components";
-import { Filters, Pokemon, TypeOption } from "./pokemon-list.vm";
+import { ViewFilter, Pokemon, TypeOption } from "./pokemon-list.vm";
 
 interface PokemonListComponentProps {
   onFavoriteClick: (pokemonId: Pokemon["id"]) => void;
-  onFilterClick: (filter: Filters) => void;
   onSearchChange: (search: string) => void;
-  onTypeSelect: (value: string) => void;
+  onTypeFilterChange: (typeFilter: string) => void;
+  onViewFilterChange: (viewFilter: ViewFilter) => void;
   pokemons: Pokemon[];
   search: string;
+  typeFilter: string;
   typeOptions: TypeOption[];
-  selectedType: string;
+  viewFilter: ViewFilter;
 }
 
 export const PokemonListComponent = ({
   onFavoriteClick,
-  onFilterClick,
-  pokemons,
   onSearchChange,
+  onTypeFilterChange,
+  onViewFilterChange,
+  pokemons,
   search,
-  onTypeSelect,
-  selectedType,
+  typeFilter,
   typeOptions,
+  viewFilter,
 }: PokemonListComponentProps) => {
   return (
     <>
       <Header
-        onAllClick={() => onFilterClick("all")}
-        onFavoritesClick={() => onFilterClick("favorites")}
         onSearchChange={onSearchChange}
-        searchTerm={search}
-        onTypeSelect={onTypeSelect}
+        onTypeFilterChange={onTypeFilterChange}
+        onViewFilterChange={onViewFilterChange}
+        search={search}
+        typeFilter={typeFilter}
         typeOptions={typeOptions}
-        selectedType={selectedType}
+        viewFilter={viewFilter}
       />
       <Gallery>
         {pokemons.map(({ id, isFavorite, name, types, imageUrl }) => (

@@ -40,7 +40,7 @@ describe("Pokemon repository", () => {
       expect(fetchMock).toHaveBeenCalledWith(
         expect.objectContaining({
           method: "GET",
-          url: `${baseURL}/pokemon/?offset=2&limit=10&search=irrelevant&type=type-1`,
+          url: `${baseURL}/pokemon/?offset=2&limit=10&isFavorite=true&search=irrelevant&type=type-1`,
         })
       );
     });

@@ -27,7 +27,7 @@ export const buildURLSearchParams = <T extends Record<string, unknown>>(object?:
       return;
     }
 
-    if (typeof value === "number") {
+    if (typeof value === "number" || typeof value === "boolean") {
       queryParams.append(key, value.toString());
     }
 
