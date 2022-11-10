@@ -2,7 +2,7 @@ import cx from "classnames";
 import styles from "./button.module.scss";
 
 type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "tertiary";
   onlyIcon?: boolean;
   isBlock?: boolean;
 };
@@ -16,6 +16,7 @@ export const Button = ({
 }: ButtonProps) => {
   const isPrimary = variant === "primary";
   const isSecondary = variant === "secondary";
+  const isTertiary = variant === "tertiary";
 
   return (
     <button
@@ -27,7 +28,7 @@ export const Button = ({
           [styles["button--secondary"]]: isSecondary,
           [styles["button--block"]]: isBlock,
           [styles["button--icon"]]: onlyIcon,
-          [styles["button--tertiary"]]: onlyIcon,
+          [styles["button--tertiary"]]: isTertiary || onlyIcon,
         },
         className
       )}

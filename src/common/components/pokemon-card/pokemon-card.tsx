@@ -25,13 +25,13 @@ export const PokemonCard = ({
   return (
     <Card className={cx(styles.container, className)} onClick={onClick}>
       <img loading="lazy" className={styles.media} alt={title} src={imageUrl} />
-      <div className={styles.description}>
+      <footer className={styles.footer}>
         <hgroup>
           <h2>{title}</h2>
           <p>{description}</p>
         </hgroup>
         <HeartButton onClick={onFavorite} isActive={isFavorite} />
-      </div>
+      </footer>
     </Card>
   );
 };

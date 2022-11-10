@@ -34,11 +34,15 @@ const get = <Response>(path: string, config?: RequestInit) => {
   return client<Response>(path, requestConfig);
 };
 
-const post = <Body, Response>(
-  path: string,
-  body: Body,
-  config?: RequestInit
-): Promise<Response> => {
+const post = <Response, Body = undefined>({
+  path,
+  body,
+  config,
+}: {
+  path: string;
+  body?: Body;
+  config?: RequestInit;
+}): Promise<Response> => {
   const requestConfig: RequestInit = {
     method: "POST",
     body: JSON.stringify(body),

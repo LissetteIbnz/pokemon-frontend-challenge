@@ -65,11 +65,11 @@ export const Header = ({
           className={styles.type}
         />
         <div className={styles.actions}>
-          <Button variant="secondary" onlyIcon={true}>
+          <Button onlyIcon={true}>
             <IconMenu className={styles.icon} />
           </Button>
           <div className={styles.separator} />
-          <Button variant="secondary" onlyIcon={true}>
+          <Button onlyIcon={true}>
             <IconGrid className={styles.icon} />
           </Button>
         </div>

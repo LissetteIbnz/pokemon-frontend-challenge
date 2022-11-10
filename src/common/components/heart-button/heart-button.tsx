@@ -4,13 +4,14 @@ import styles from "./heart-button.module.scss";
 export interface HeartButtonProps {
   isActive?: boolean;
   onClick: () => void;
+  className?: string;
 }
 
-export const HeartButton = ({ isActive, onClick }: HeartButtonProps) => {
+export const HeartButton = ({ isActive, onClick, className }: HeartButtonProps) => {
   const srText = isActive ? "Remove as favorite" : "Mark as favorite";
 
   return (
-    <button aria-label={srText} className={styles.button} onClick={onClick}>
+    <button aria-label={srText} className={cx(styles.button, className)} onClick={onClick}>
       <svg
         focusable="false"
         className={cx(styles.heart, { [styles["heart--filled"]]: isActive })}
