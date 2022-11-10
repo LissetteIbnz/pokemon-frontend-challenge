@@ -1,6 +1,6 @@
 import { pokemonRepository } from "infra/repository";
 import { mapPokemonAmToVm, mapPokemonTypeAmToVm } from "./pokemon-list.mapper";
-import { QueryFilters } from "./pokemon-list.vm";
+import { Pokemon, QueryFilters } from "./pokemon-list.vm";
 
 export const getPaginatedPokemons = async ({ offset, search, type, isFavorite }: QueryFilters) => {
   const PAGE_SIZE = 10;
@@ -25,4 +25,14 @@ export const getPaginatedPokemons = async ({ offset, search, type, isFavorite }:
 export const getPokemonsTypes = async () => {
   const response = await pokemonRepository.getTypes();
   return response.map(mapPokemonTypeAmToVm);
+};
+
+export const setFavorite = async (pokemonId: Pokemon["id"]) => {
+  const response = await pokemonRepository.setFavorite(pokemonId);
+  return mapPokemonAmToVm(response);
+};
+
+export const setUnfavorite = async (pokemonId: Pokemon["id"]) => {
+  const response = await pokemonRepository.setUnfavorite(pokemonId);
+  return mapPokemonAmToVm(response);
 };

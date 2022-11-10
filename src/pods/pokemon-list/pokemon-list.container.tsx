@@ -3,7 +3,7 @@ import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
 import { routes } from "core/router";
 import { PokemonListComponent } from "./pokemon.component";
-import { usePokemonList, usePokemonTypes } from "./pokemon-list.hook";
+import { useFavorite, usePokemonList, usePokemonTypes } from "./pokemon-list.hook";
 import { Pokemon } from "./pokemon-list.vm";
 
 export const PokemonListContainer = () => {
@@ -25,6 +25,8 @@ export const PokemonListContainer = () => {
     typeFilter,
     viewFilter,
   } = usePokemonList();
+
+  const { onFavorite } = useFavorite();
 
   React.useEffect(() => {
     if (inView) {
@@ -49,7 +51,7 @@ export const PokemonListContainer = () => {
       <PokemonListComponent
         onPokemonClick={handleNavigateDetails}
         onViewFilterChange={onViewFilterChange}
-        onFavoriteClick={() => undefined}
+        onFavoriteClick={onFavorite}
         onSearchChange={onSearchChange}
         search={search}
         pokemons={pokemons}

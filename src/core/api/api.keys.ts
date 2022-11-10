@@ -6,4 +6,5 @@ export const pokemonsKeys = {
   list: (filters: Filters) => [pokemonsKeys.all, { ...filters }] as const,
   details: () => [...pokemonsKeys.all, "detail"] as const,
   detail: (pokemonId: string) => [...pokemonsKeys.details(), pokemonId] as const,
+  types: ["pokemon-types"] as const,
 };

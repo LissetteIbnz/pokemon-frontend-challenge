@@ -1,9 +1,14 @@
 import * as React from "react";
-import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useDebounce } from "common/hooks";
 import { pokemonsKeys } from "core/api";
-import { getPaginatedPokemons, getPokemonsTypes } from "./pokemon-list.api";
-import { ViewFilter, QueryFilters } from "./pokemon-list.vm";
+import {
+  getPaginatedPokemons,
+  getPokemonsTypes,
+  setFavorite,
+  setUnfavorite,
+} from "./pokemon-list.api";
+import { ViewFilter, QueryFilters, Pokemon } from "./pokemon-list.vm";
 
 export const usePokemonList = () => {
   const INITIAL_OFFSET = 0;
@@ -63,7 +68,7 @@ export const usePokemonList = () => {
 };
 
 export const usePokemonTypes = () => {
-  const { data, isLoading, isError } = useQuery(["pokemon-types"], getPokemonsTypes, {
+  const { data, isLoading, isError } = useQuery(pokemonsKeys.types, getPokemonsTypes, {
     refetchOnReconnect: false,
   });
 
@@ -73,5 +78,36 @@ export const usePokemonTypes = () => {
     pokemonTypes,
     isLoading,
     isError,
+  };
+};
+
+export const useFavorite = () => {
+  const queryClient = useQueryClient();
+
+  const { mutate: onFavorite } = useMutation((pokemonId: Pokemon["id"]) => setFavorite(pokemonId), {
+    onSettled: () => {
+      queryClient.invalidateQueries();
+    },
+  });
+
+  const { mutate: onUnfavorite } = useMutation(
+    (pokemonId: Pokemon["id"]) => setUnfavorite(pokemonId),
+    {
+      onSettled: () => {
+        queryClient.invalidateQueries();
+      },
+    }
+  );
+
+  const handleFavoriteClick = (pokemonId: Pokemon["id"], isFavorite: boolean) => {
+    if (isFavorite) {
+      onUnfavorite(pokemonId);
+    } else {
+      onFavorite(pokemonId);
+    }
+  };
+
+  return {
+    onFavorite: handleFavoriteClick,
   };
 };
