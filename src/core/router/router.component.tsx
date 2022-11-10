@@ -9,7 +9,7 @@ export const RouterComponent = () => {
       <React.Suspense fallback={<>...</>}>
         <Routes>
           <Route element={<PokemonListScene />} path={routes.root} />
-          <Route element={<PokemonDetailsScene />} path={`${routes.details}/:id`} />
+          <Route element={<PokemonDetailsScene />} path={routes.details} />
           <Route element={<NotFoundScene />} path="*" />
         </Routes>
       </React.Suspense>

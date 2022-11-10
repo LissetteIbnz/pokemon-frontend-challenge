@@ -2,6 +2,8 @@ import { pokemonRepository } from "infra/repository";
 import { mapPokemonDetailsAmToVm } from "./pokemon-details.mapper";
 import { PokemonDetails } from "./pokemon-details.vm";
 
+export const pokemonDetailsKeys = (pokemonId: string) => ["details", pokemonId] as const;
+
 export const getPokemonById = async (pokemonIdURL: string) => {
   const response = await pokemonRepository.getById(pokemonIdURL);
   return mapPokemonDetailsAmToVm(response);

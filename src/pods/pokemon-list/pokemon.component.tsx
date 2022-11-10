@@ -41,7 +41,7 @@ export const PokemonListComponent = ({
       <Gallery>
         {pokemons.map(({ id, isFavorite, name, types, imageUrl }) => (
           <PokemonCard
-            description={types}
+            types={types}
             imageUrl={imageUrl}
             isFavorite={isFavorite}
             key={id}

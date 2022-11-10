@@ -1,7 +1,7 @@
 export const routes = {
   root: "/",
-  details: "details",
-  detailsById: (pokemonId: string) => `${routes.details}/${pokemonId}`,
+  details: "/details/:id",
+  detailsById: (pokemonId: string) => `/details/${pokemonId}`,
   notFound: "/404",
 } as const;
 

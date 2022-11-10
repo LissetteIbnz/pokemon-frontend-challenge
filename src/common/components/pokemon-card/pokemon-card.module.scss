@@ -3,6 +3,7 @@
 .container {
   max-width: 300px;
   cursor: pointer;
+  user-select: none;
 }
 
 .media {
