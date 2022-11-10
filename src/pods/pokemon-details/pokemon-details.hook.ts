@@ -1,10 +1,6 @@
 import { useQueryClient, useQuery, useMutation } from "@tanstack/react-query";
-import {
-  getPokemonById,
-  setFavorite,
-  setUnfavorite,
-  pokemonDetailsKeys,
-} from "./pokemon-details.api";
+import { pokemonsKeys } from "core/api/api.keys";
+import { getPokemonById, setFavorite, setUnfavorite } from "./pokemon-details.api";
 import { updaterToggleFavoriteMutation } from "./pokemon-details.business";
 import { PokemonDetails } from "./pokemon-details.vm";
 
@@ -15,27 +11,29 @@ export const usePokemonDetails = (pokemonIdURL: string) => {
     data: pokemon,
     isLoading,
     isError,
-  } = useQuery(pokemonDetailsKeys(pokemonIdURL), () => getPokemonById(pokemonIdURL));
+  } = useQuery(pokemonsKeys.detailsById(pokemonIdURL), () => getPokemonById(pokemonIdURL));
 
   const { mutate: onFavorite } = useMutation(
     (pokemonId: PokemonDetails["id"]) => setFavorite(pokemonId),
     {
       onMutate: async (newPokemonId) => {
-        await queryClient.cancelQueries(pokemonDetailsKeys(pokemonIdURL));
+        await queryClient.cancelQueries(pokemonsKeys.detailsById(pokemonIdURL));
 
         const previousData = queryClient.getQueryData<PokemonDetails>(
-          pokemonDetailsKeys(pokemonIdURL)
+          pokemonsKeys.detailsById(pokemonIdURL)
         );
         if (previousData) {
-          queryClient.setQueryData<PokemonDetails>(pokemonDetailsKeys(pokemonIdURL), (oldPokemon) =>
-            updaterToggleFavoriteMutation(newPokemonId, oldPokemon)
+          queryClient.setQueryData<PokemonDetails>(
+            pokemonsKeys.detailsById(pokemonIdURL),
+            (oldPokemon) => updaterToggleFavoriteMutation(newPokemonId, oldPokemon)
           );
         }
 
         return previousData;
       },
       onSettled: () => {
-        queryClient.invalidateQueries(pokemonDetailsKeys(pokemonIdURL));
+        queryClient.invalidateQueries(pokemonsKeys.all);
+        queryClient.invalidateQueries(pokemonsKeys.detailsById(pokemonIdURL));
       },
     }
   );
@@ -44,21 +42,23 @@ export const usePokemonDetails = (pokemonIdURL: string) => {
     (pokemonId: PokemonDetails["id"]) => setUnfavorite(pokemonId),
     {
       onMutate: async (newPokemonId) => {
-        await queryClient.cancelQueries(pokemonDetailsKeys(pokemonIdURL));
+        await queryClient.cancelQueries(pokemonsKeys.detailsById(pokemonIdURL));
 
         const previousData = queryClient.getQueryData<PokemonDetails>(
-          pokemonDetailsKeys(pokemonIdURL)
+          pokemonsKeys.detailsById(pokemonIdURL)
         );
         if (previousData) {
-          queryClient.setQueryData<PokemonDetails>(pokemonDetailsKeys(pokemonIdURL), (oldPokemon) =>
-            updaterToggleFavoriteMutation(newPokemonId, oldPokemon)
+          queryClient.setQueryData<PokemonDetails>(
+            pokemonsKeys.detailsById(pokemonIdURL),
+            (oldPokemon) => updaterToggleFavoriteMutation(newPokemonId, oldPokemon)
           );
         }
 
         return previousData;
       },
       onSettled: () => {
-        queryClient.invalidateQueries(pokemonDetailsKeys(pokemonIdURL));
+        queryClient.invalidateQueries(pokemonsKeys.all);
+        queryClient.invalidateQueries(pokemonsKeys.detailsById(pokemonIdURL));
       },
     }
   );
