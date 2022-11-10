@@ -2,7 +2,7 @@ import * as React from "react";
 import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
 import { routes } from "core/router";
-import { PokemonListComponent } from "./pokemon.component";
+import { PokemonListComponent } from "./pokemon-list.component";
 import { useFavorite, usePokemonList, usePokemonTypes } from "./pokemon-list.hook";
 import { Pokemon } from "./pokemon-list.vm";
 
