@@ -1,26 +1,27 @@
 import cx from "classnames";
 import { Card } from "../card";
 import { HeartButton } from "../heart-button";
+import { SoundButton } from "./components";
 import styles from "./pokemon-card.module.scss";
 
 export interface PokemonCardProps {
   className?: string;
-  description: string;
   imageUrl: string;
   isFavorite: boolean;
-  onFavorite: () => void;
   onClick: () => void;
+  onFavorite: () => void;
   title: string;
+  types?: string;
 }
 
 export const PokemonCard = ({
-  description,
+  className,
   imageUrl,
   isFavorite,
-  onFavorite,
   onClick,
+  onFavorite,
   title,
-  className,
+  types,
 }: PokemonCardProps) => {
   return (
     <Card className={cx(styles.container, className)} onClick={onClick}>
@@ -28,7 +29,7 @@ export const PokemonCard = ({
       <footer className={styles.footer}>
         <hgroup>
           <h2>{title}</h2>
-          <p>{description}</p>
+          {types && <p>{types}</p>}
         </hgroup>
         <HeartButton onClick={onFavorite} isActive={isFavorite} />
       </footer>

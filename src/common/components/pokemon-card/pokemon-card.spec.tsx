@@ -6,7 +6,7 @@ describe("<PokemonCard />", () => {
 
   beforeEach(() => {
     props = {
-      description: "Description",
+      types: undefined,
       imageUrl: "irrelevant-url.png",
       isFavorite: false,
       title: "Title",
@@ -21,10 +21,16 @@ describe("<PokemonCard />", () => {
     expect(screen.getByRole("heading", { name: props.title })).toBeInTheDocument();
   });
 
-  it("should render a description", () => {
-    render(<PokemonCard {...props} />);
+  it("should render a types when it exists", () => {
+    const expectedText = "Types";
 
-    expect(screen.getByText(props.description)).toBeInTheDocument();
+    props.types = undefined;
+    const { rerender } = render(<PokemonCard {...props} />);
+    expect(screen.queryByText(expectedText)).not.toBeInTheDocument();
+
+    props.types = expectedText;
+    rerender(<PokemonCard {...props} />);
+    expect(screen.getByText(expectedText)).toBeInTheDocument();
   });
 
   it("should render an image", () => {
@@ -43,6 +49,7 @@ describe("<PokemonCard />", () => {
   });
 
   it("should call 'onClick' when a user clicks on the card", () => {
+    props.onClick = jest.fn();
     render(<PokemonCard {...props} />);
 
     const card = screen.getByRole("img");

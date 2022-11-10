@@ -13,7 +13,7 @@ const Template: ComponentStory<PokemonCardComponent> = (args) => <PokemonCard {.
 export const Default = Template.bind({});
 
 Default.args = {
-  description: "Grass, Poison",
+  types: "Grass, Poison",
   isFavorite: false,
   title: "Bulbasaur",
 };

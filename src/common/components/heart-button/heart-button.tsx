@@ -1,4 +1,5 @@
 import cx from "classnames";
+import React from "react";
 import styles from "./heart-button.module.scss";
 
 export interface HeartButtonProps {
@@ -10,9 +11,15 @@ export interface HeartButtonProps {
 export const HeartButton = ({ isActive, onClick, className }: HeartButtonProps) => {
   const srText = isActive ? "Remove as favorite" : "Mark as favorite";
 
+  const handleHeartClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    onClick();
+  };
+
   return (
-    <button aria-label={srText} className={cx(styles.button, className)} onClick={onClick}>
+    <button aria-label={srText} className={cx(styles.button, className)} onClick={handleHeartClick}>
       <svg
+        aria-hidden={true}
         focusable="false"
         className={cx(styles.heart, { [styles["heart--filled"]]: isActive })}
         xmlns="http://www.w3.org/2000/svg"
