@@ -1,10 +1,10 @@
 import * as React from "react";
 import { useInView } from "react-intersection-observer";
+import { useNavigate } from "react-router-dom";
+import { routes } from "core/router";
 import { PokemonListComponent } from "./pokemon.component";
 import { usePokemonList, usePokemonTypes } from "./pokemon-list.hook";
-import { useNavigate } from "react-router-dom";
 import { Pokemon } from "./pokemon-list.vm";
-import { routes } from "core/router/routes";
 
 export const PokemonListContainer = () => {
   const navigate = useNavigate();

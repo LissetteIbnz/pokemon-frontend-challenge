@@ -1,6 +1,7 @@
 import * as React from "react";
 import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { useDebounce } from "common/hooks";
+import { pokemonsKeys } from "core/api";
 import { getPaginatedPokemons, getPokemonsTypes } from "./pokemon-list.api";
 import { ViewFilter, QueryFilters } from "./pokemon-list.vm";
 
@@ -22,7 +23,7 @@ export const usePokemonList = () => {
 
   const { isError, isLoading, data, isFetchingNextPage, fetchNextPage, hasNextPage } =
     useInfiniteQuery(
-      ["pokemons", { ...queryFilters }],
+      pokemonsKeys.list(queryFilters),
       async ({ pageParam = INITIAL_OFFSET, queryKey }) => {
         const [_, filters] = queryKey;
         const { type, search, isFavorite } = filters as QueryFilters;

@@ -6,5 +6,4 @@ export const routes = {
 } as const;
 
 export type Routes = typeof routes;
-
 export type TypeRoutes = typeof routes[keyof typeof routes];
