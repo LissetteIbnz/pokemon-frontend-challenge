@@ -17,7 +17,7 @@ describe("Pokemon repository", () => {
   });
 
   describe("getAll", () => {
-    it("should call the pokemon endpoint", async () => {
+    it("should call the pokemons endpoint", async () => {
       await pokemonRepository.getAll();
 
       expect(fetchMock).toHaveBeenCalledWith(
@@ -28,7 +28,7 @@ describe("Pokemon repository", () => {
       );
     });
 
-    it("should call the pokemon endpoint with query params", async () => {
+    it("should call the pokemons endpoint with query params", async () => {
       await pokemonRepository.getAll({
         offset: 2,
         limit: 10,
@@ -41,6 +41,48 @@ describe("Pokemon repository", () => {
         expect.objectContaining({
           method: "GET",
           url: `${baseURL}/pokemon/?offset=2&limit=10&isFavorite=true&search=irrelevant&type=type-1`,
+        })
+      );
+    });
+  });
+
+  describe("getById", () => {
+    it("should call the pokemon by id endpoint", async () => {
+      const id = "001";
+      await pokemonRepository.getById(id);
+
+      expect(fetchMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          method: "GET",
+          url: `${baseURL}/pokemon/${id}`,
+        })
+      );
+    });
+  });
+
+  describe("setFavorite", () => {
+    it("should call the pokemon favorite id endpoint", async () => {
+      const id = "001";
+      await pokemonRepository.setFavorite(id);
+
+      expect(fetchMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          method: "POST",
+          url: `${baseURL}/pokemon/${id}/favorite`,
+        })
+      );
+    });
+  });
+
+  describe("setUnfavorite", () => {
+    it("should call the pokemon by id endpoint", async () => {
+      const id = "001";
+      await pokemonRepository.setUnfavorite(id);
+
+      expect(fetchMock).toHaveBeenCalledWith(
+        expect.objectContaining({
+          method: "POST",
+          url: `${baseURL}/pokemon/${id}/unfavorite`,
         })
       );
     });

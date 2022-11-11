@@ -14,6 +14,7 @@ export const mockPokemonDetailsDTO: PokemonDetailsDTO = {
   evolutions: [
     {
       ...mockPokemonDTO,
+      name: "Irrelevant evolution name",
     },
   ],
   height: {

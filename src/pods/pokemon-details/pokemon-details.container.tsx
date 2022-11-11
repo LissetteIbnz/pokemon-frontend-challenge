@@ -14,6 +14,10 @@ export const PokemonDetailsContainer = () => {
     navigate(routes.detailsById(pokemonId));
   };
 
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -26,6 +30,7 @@ export const PokemonDetailsContainer = () => {
     <PokemonDetailsComponent
       pokemon={pokemon!}
       onFavorite={onFavorite}
+      onGoBack={handleGoBack}
       onNavigateToPokemon={handleNavigateToPokemon}
     />
   );

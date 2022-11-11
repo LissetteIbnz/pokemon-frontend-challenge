@@ -1,6 +1,5 @@
 import * as React from "react";
-import { IconSound } from "assets/icons";
-import { AudioButton, Button, Card, HeartButton } from "common/components";
+import { AudioButton, Card, HeartButton } from "common/components";
 import { PokemonDetails } from "../pokemon-details.vm";
 import styles from "./pokemon-details-card.module.scss";
 

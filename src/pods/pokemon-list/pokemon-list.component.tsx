@@ -4,7 +4,7 @@ import { Gallery, Header } from "./components";
 import { ViewFilter, Pokemon, TypeOption, View } from "./pokemon-list.vm";
 import styles from "./pokemon-list.module.scss";
 
-interface PokemonListComponentProps {
+export interface PokemonListComponentProps {
   fetchButton: React.ReactNode;
   onFavoriteClick: (pokemonId: Pokemon["id"], isFavorite: boolean) => void;
   onPokemonClick: (pokemonId: Pokemon["id"]) => void;

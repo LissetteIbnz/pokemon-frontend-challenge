@@ -1,5 +1,5 @@
 import { mockPokemonDTO } from "common/mocks";
-import { mapPokemonAmToVm } from "./pokemon-list.mapper";
+import { mapPokemonAmToVm, mapPokemonTypeAmToVm } from "./pokemon-list.mapper";
 
 describe("Pokemon list mappers", () => {
   describe("mapPokemonAmToVm", () => {
@@ -13,6 +13,15 @@ describe("Pokemon list mappers", () => {
           "types": "type-1, type-2",
         }
       `);
+    });
+  });
+
+  describe("mapPokemonTypeAmToVm", () => {
+    it("should map correctly", () => {
+      expect(mapPokemonTypeAmToVm("type")).toEqual({
+        label: "type",
+        value: "type",
+      });
     });
   });
 });

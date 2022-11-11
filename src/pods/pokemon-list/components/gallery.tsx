@@ -2,7 +2,7 @@ import cx from "classnames";
 import { View } from "../pokemon-list.vm";
 import styles from "./gallery.module.scss";
 
-interface GalleryProps {
+export interface GalleryProps {
   children: React.ReactNode;
   view: View;
 }

@@ -12,7 +12,7 @@ describe("Pokemon Details mappers", () => {
               "id": "irrelevant-id",
               "imageURL": "irrelevant-image-url.png",
               "isFavorite": false,
-              "name": "Irrelevant Name",
+              "name": "Irrelevant evolution name",
             },
           ],
           "height": "max height - min height",
