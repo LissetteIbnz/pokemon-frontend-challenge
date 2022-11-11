@@ -21,12 +21,12 @@ export const EvolutionSection = ({
       <div className={styles.evolution}>
         {evolutions.map((evolution) => (
           <PokemonCard
+            key={evolution.id}
             imageUrl={evolution.imageURL}
             isFavorite={evolution.isFavorite}
-            key={evolution.id}
+            title={evolution.name}
             onClick={() => onNavigateToPokemon(evolution.id)}
             onFavorite={() => onFavorite(evolution.id, evolution.isFavorite)}
-            title={evolution.name}
           />
         ))}
       </div>

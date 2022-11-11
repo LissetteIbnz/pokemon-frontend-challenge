@@ -1,5 +1,4 @@
 import cx from "classnames";
-import React from "react";
 import styles from "./heart-button.module.scss";
 
 export interface HeartButtonProps {
@@ -20,12 +19,12 @@ export const HeartButton = ({ isActive, onClick, className }: HeartButtonProps) 
     <button aria-label={srText} className={cx(styles.button, className)} onClick={handleHeartClick}>
       <svg
         aria-hidden={true}
-        focusable="false"
         className={cx(styles.heart, { [styles["heart--filled"]]: isActive })}
-        xmlns="http://www.w3.org/2000/svg"
+        focusable="false"
         height="24px"
-        width="24px"
         viewBox="0 0 612 792"
+        width="24px"
+        xmlns="http://www.w3.org/2000/svg"
       >
         <path
           d="M611.721,288.299c-2.258-42.176-20.114-81.782-50.287-111.524c-30.557-30.119-70.43-46.708-112.27-46.708

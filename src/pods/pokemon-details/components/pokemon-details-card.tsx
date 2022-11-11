@@ -19,33 +19,33 @@ export const PokemonDetailsCard = ({ onFavorite, pokemon }: PokemonDetailsCardPr
   return (
     <Card>
       <div className={styles["media-container"]}>
-        <img className={styles.image} loading="lazy" src={pokemon.imageURL} alt={pokemon.name} />
+        <img alt={pokemon.name} className={styles.image} loading="lazy" src={pokemon.imageURL} />
         <Button className={styles.sound} onlyIcon={true}>
           <IconSound aria-hidden={true} />
         </Button>
       </div>
       <footer className={styles.footer}>
-        <hgroup className={styles["footer__description"]}>
+        <hgroup className={styles.footer__description}>
           <h2>{pokemon.name}</h2>
           <p>{pokemon.type}</p>
         </hgroup>
-        <div className={styles["footer__heart"]}>
+        <div className={styles.footer__heart}>
           <HeartButton
-            onClick={() => onFavorite(pokemon.id, pokemon.isFavorite)}
             isActive={pokemon.isFavorite}
+            onClick={() => onFavorite(pokemon.id, pokemon.isFavorite)}
           />
         </div>
-        <Bar className={styles["footer__cp"]}>
+        <Bar className={styles.footer__cp}>
           {LITERALS.cp} {pokemon.cp}
         </Bar>
-        <Bar className={styles["footer__hp"]}>
+        <Bar className={styles.footer__hp}>
           {LITERALS.hp} {pokemon.hp}
         </Bar>
-        <div className={styles["footer__left"]}>
+        <div className={styles.footer__left}>
           <p>{LITERALS.weight}</p>
           <p>{pokemon.weight}</p>
         </div>
-        <div className={styles["footer__right"]}>
+        <div className={styles.footer__right}>
           <p>{LITERALS.height}</p>
           <p>{pokemon.height}</p>
         </div>

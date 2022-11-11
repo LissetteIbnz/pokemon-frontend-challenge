@@ -58,29 +58,29 @@ export const Header = ({
         <Input
           className={styles.search}
           placeholder={LITERALS.search}
-          onChange={onSearchChange}
           value={search}
+          onChange={onSearchChange}
         />
         <Select
-          placeholder={LITERALS.type}
-          onChange={onTypeFilterChange}
-          options={typeOptions}
-          value={typeFilter}
           className={styles.type}
+          options={typeOptions}
+          placeholder={LITERALS.type}
+          value={typeFilter}
+          onChange={onTypeFilterChange}
         />
         <div className={styles.actions}>
           <Button
-            onClick={() => onViewChange("list")}
             aria-label={LITERALS.viewList}
             onlyIcon={true}
+            onClick={() => onViewChange("list")}
           >
             <IconMenu aria-hidden={true} className={styles.icon} />
           </Button>
           <div className={styles.separator} />
           <Button
-            onClick={() => onViewChange("grid")}
             aria-label={LITERALS.viewGrid}
             onlyIcon={true}
+            onClick={() => onViewChange("grid")}
           >
             <IconGrid aria-hidden={true} className={styles.icon} />
           </Button>

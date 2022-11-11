@@ -5,6 +5,7 @@ import { ViewFilter, Pokemon, TypeOption, View } from "./pokemon-list.vm";
 import styles from "./pokemon-list.module.scss";
 
 interface PokemonListComponentProps {
+  fetchButton: React.ReactNode;
   onFavoriteClick: (pokemonId: Pokemon["id"], isFavorite: boolean) => void;
   onPokemonClick: (pokemonId: Pokemon["id"]) => void;
   onSearchChange: (search: string) => void;
@@ -20,6 +21,7 @@ interface PokemonListComponentProps {
 }
 
 export const PokemonListComponent = ({
+  fetchButton,
   onFavoriteClick,
   onPokemonClick,
   onSearchChange,
@@ -38,29 +40,30 @@ export const PokemonListComponent = ({
   return (
     <>
       <Header
-        onSearchChange={onSearchChange}
-        onTypeFilterChange={onTypeFilterChange}
-        onViewFilterChange={onViewFilterChange}
         search={search}
         typeFilter={typeFilter}
         typeOptions={typeOptions}
         viewFilter={viewFilter}
+        onSearchChange={onSearchChange}
+        onTypeFilterChange={onTypeFilterChange}
         onViewChange={onViewChange}
+        onViewFilterChange={onViewFilterChange}
       />
       <Gallery view={view}>
         {pokemons.map(({ id, isFavorite, name, types, imageUrl }) => (
           <PokemonCard
+            key={id}
             className={cx({ [styles.list]: isListView })}
-            types={types}
             imageUrl={imageUrl}
             isFavorite={isFavorite}
-            key={id}
+            title={name}
+            types={types}
             onClick={() => onPokemonClick(id)}
             onFavorite={() => onFavoriteClick(id, isFavorite)}
-            title={name}
           />
         ))}
       </Gallery>
+      {fetchButton}
     </>
   );
 };

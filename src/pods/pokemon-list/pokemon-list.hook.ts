@@ -78,7 +78,7 @@ export const usePokemonList = () => {
 
   return {
     fetchNextPage,
-    hasNextPage,
+    hasNextPage: Boolean(hasNextPage),
     isError,
     isFetchingNextPage,
     isLoading,

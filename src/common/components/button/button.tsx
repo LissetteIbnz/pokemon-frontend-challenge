@@ -5,6 +5,7 @@ type ButtonProps = React.HTMLAttributes<HTMLButtonElement> & {
   variant?: "primary" | "secondary" | "tertiary";
   onlyIcon?: boolean;
   isBlock?: boolean;
+  disabled?: boolean;
 };
 
 export const Button = ({
@@ -29,6 +30,7 @@ export const Button = ({
           [styles["button--block"]]: isBlock,
           [styles["button--icon"]]: onlyIcon,
           [styles["button--tertiary"]]: isTertiary || onlyIcon,
+          [styles.disabled]: props.disabled,
         },
         className
       )}

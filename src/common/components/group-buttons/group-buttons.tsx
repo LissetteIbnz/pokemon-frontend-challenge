@@ -17,7 +17,7 @@ export const GroupButtons = ({ buttons }: GroupButtonsProps) => {
       {buttons.map(({ title, isActive, onClick }) => {
         const variant = isActive ? "primary" : "secondary";
         return (
-          <Button isBlock={true} key={title} onClick={onClick} variant={variant}>
+          <Button key={title} isBlock={true} variant={variant} onClick={onClick}>
             {title}
           </Button>
         );

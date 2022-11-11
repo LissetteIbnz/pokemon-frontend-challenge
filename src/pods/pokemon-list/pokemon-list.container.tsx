@@ -5,6 +5,7 @@ import { routes } from "core/router";
 import { PokemonListComponent } from "./pokemon-list.component";
 import { usePokemonList, usePokemonTypes } from "./pokemon-list.hook";
 import { Pokemon, View } from "./pokemon-list.vm";
+import { LoadMoreButton } from "./components";
 
 export const PokemonListContainer = () => {
   const navigate = useNavigate();
@@ -52,35 +53,27 @@ export const PokemonListContainer = () => {
   }
 
   return (
-    <>
-      <PokemonListComponent
-        onFavoriteClick={onFavorite}
-        onPokemonClick={handleNavigateDetails}
-        onSearchChange={onSearchChange}
-        onTypeFilterChange={onTypeFilterChange}
-        onViewChange={handleViewChange}
-        onViewFilterChange={onViewFilterChange}
-        pokemons={pokemons}
-        search={search}
-        typeFilter={typeFilter}
-        typeOptions={pokemonTypes}
-        viewFilter={viewFilter}
-        view={view}
-      />
-
-      <div>
-        <button
+    <PokemonListComponent
+      fetchButton={
+        <LoadMoreButton
           ref={ref}
-          onClick={() => fetchNextPage()}
-          disabled={!hasNextPage || isFetchingNextPage}
-        >
-          {isFetchingNextPage
-            ? "Loading more..."
-            : hasNextPage
-            ? "Load Newer"
-            : "Nothing more to load"}
-        </button>
-      </div>
-    </>
+          fetchNextPage={fetchNextPage}
+          hasNextPage={hasNextPage}
+          isFetchingNextPage={isFetchingNextPage}
+        />
+      }
+      pokemons={pokemons}
+      search={search}
+      typeFilter={typeFilter}
+      typeOptions={pokemonTypes}
+      view={view}
+      viewFilter={viewFilter}
+      onFavoriteClick={onFavorite}
+      onPokemonClick={handleNavigateDetails}
+      onSearchChange={onSearchChange}
+      onTypeFilterChange={onTypeFilterChange}
+      onViewChange={handleViewChange}
+      onViewFilterChange={onViewFilterChange}
+    />
   );
 };

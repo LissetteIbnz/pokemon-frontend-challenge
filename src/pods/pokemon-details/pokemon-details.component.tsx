@@ -18,15 +18,15 @@ export const PokemonDetailsComponent = ({
   return (
     <article className={styles.container}>
       <PokemonDetailsCard
-        onFavorite={() => onFavorite(pokemon.id, pokemon.isFavorite)}
         pokemon={pokemon}
+        onFavorite={() => onFavorite(pokemon.id, pokemon.isFavorite)}
       />
 
       {hasEvolutions && (
         <EvolutionSection
-          onNavigateToPokemon={onNavigateToPokemon}
           evolutions={pokemon.evolutions}
           onFavorite={onFavorite}
+          onNavigateToPokemon={onNavigateToPokemon}
         />
       )}
     </article>

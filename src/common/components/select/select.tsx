@@ -24,12 +24,12 @@ export const Select = ({ className, onChange, options, value, placeholder }: Sel
   return (
     <ReactSelect
       className={className}
-      placeholder={placeholder}
       defaultValue={formattedValue}
       isClearable={true}
-      onChange={handleChange}
-      styles={reactSelectStyles}
       options={options}
+      placeholder={placeholder}
+      styles={reactSelectStyles}
+      onChange={handleChange}
     />
   );
 };

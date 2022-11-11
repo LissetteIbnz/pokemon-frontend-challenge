@@ -32,9 +32,9 @@ export const PokemonCard = ({
       onClick={onClick}
     >
       <img
-        loading="lazy"
-        className={cx(styles.media, { [styles["media--row"]]: isRow })}
         alt={title}
+        className={cx(styles.media, { [styles["media--row"]]: isRow })}
+        loading="lazy"
         src={imageUrl}
       />
       <footer className={styles.footer}>
@@ -42,7 +42,7 @@ export const PokemonCard = ({
           <h2>{title}</h2>
           {hasTypes && <p>{types}</p>}
         </hgroup>
-        <HeartButton onClick={onFavorite} isActive={isFavorite} />
+        <HeartButton isActive={isFavorite} onClick={onFavorite} />
       </footer>
     </Card>
   );

@@ -24,9 +24,9 @@ export const PokemonDetailsContainer = () => {
 
   return (
     <PokemonDetailsComponent
-      onNavigateToPokemon={handleNavigateToPokemon}
       pokemon={pokemon!}
       onFavorite={onFavorite}
+      onNavigateToPokemon={handleNavigateToPokemon}
     />
   );
 };
