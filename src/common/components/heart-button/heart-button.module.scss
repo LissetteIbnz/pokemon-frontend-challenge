@@ -1,0 +1,21 @@
+$heart-color: red;
+$heart-stroke-width: 62px;
+
+.button {
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.heart {
+  fill: transparent;
+  stroke: $heart-color;
+  stroke-width: $heart-stroke-width;
+  transition: all 0.2s linear;
+
+  &--filled {
+    fill: $heart-color;
+    stroke: $heart-color;
+    stroke-width: $heart-stroke-width;
+  }
+}

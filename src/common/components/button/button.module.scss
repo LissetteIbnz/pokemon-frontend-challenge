@@ -1,0 +1,43 @@
+@use "assets/scss/colors" as *;
+
+.button {
+  font-size: 1rem;
+  border: 1px solid $primary;
+  padding: 0.8rem 1rem;
+  transition: all 140ms ease-in;
+  cursor: pointer;
+  font-size: 1.1rem;
+
+  &--primary {
+    background: $primary;
+    color: $white;
+  }
+
+  &--secondary {
+    background: $white;
+    color: $primary;
+  }
+
+  &--tertiary {
+    border-color: $white;
+    background: $white;
+    color: $primary;
+  }
+
+  &--icon {
+    padding: 4px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &--block {
+    width: 100%;
+  }
+}
+
+.disabled {
+  cursor: not-allowed;
+  border-color: $border;
+  background: $border;
+}

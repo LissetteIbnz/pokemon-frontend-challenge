@@ -1,0 +1,14 @@
+$card-width: 250px;
+
+.gallery {
+  align-self: stretch;
+  padding-inline: 1rem;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax($card-width, 1fr));
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
