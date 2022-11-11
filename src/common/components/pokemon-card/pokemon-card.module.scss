@@ -4,6 +4,10 @@
   max-width: 300px;
   cursor: pointer;
   user-select: none;
+
+  &--row {
+    flex-direction: row;
+  }
 }
 
 .media {
@@ -14,6 +18,11 @@
   padding: 1rem;
   object-fit: contain;
   transition: transform 0.3s ease-in-out;
+
+  &--row {
+    width: 60px;
+    height: 60px;
+  }
 
   &:hover {
     transform: scale(1.05);

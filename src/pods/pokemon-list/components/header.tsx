@@ -2,7 +2,7 @@ import * as React from "react";
 import cx from "classnames";
 import { IconGrid, IconMenu } from "assets/icons";
 import { Button, GroupButtons, GroupButtonsProps, Input, Select } from "common/components";
-import { ViewFilter, TypeOption } from "../pokemon-list.vm";
+import { ViewFilter, TypeOption, View } from "../pokemon-list.vm";
 import styles from "./header.module.scss";
 
 const LITERALS = {
@@ -10,11 +10,14 @@ const LITERALS = {
   favorites: "Favorites",
   search: "Search",
   type: "Type",
+  viewList: "View list",
+  viewGrid: "View grid",
 };
 
 export interface HeaderProps {
   onSearchChange: (value: string) => void;
   onTypeFilterChange: (typeFilter: string) => void;
+  onViewChange: (view: View) => void;
   onViewFilterChange: (viewFilter: ViewFilter) => void;
   search: string;
   typeFilter: string;
@@ -25,6 +28,7 @@ export interface HeaderProps {
 export const Header = ({
   onSearchChange,
   onTypeFilterChange,
+  onViewChange,
   onViewFilterChange,
   search,
   typeFilter,
@@ -65,12 +69,20 @@ export const Header = ({
           className={styles.type}
         />
         <div className={styles.actions}>
-          <Button onlyIcon={true}>
-            <IconMenu className={styles.icon} />
+          <Button
+            onClick={() => onViewChange("list")}
+            aria-label={LITERALS.viewList}
+            onlyIcon={true}
+          >
+            <IconMenu aria-hidden={true} className={styles.icon} />
           </Button>
           <div className={styles.separator} />
-          <Button onlyIcon={true}>
-            <IconGrid className={styles.icon} />
+          <Button
+            onClick={() => onViewChange("grid")}
+            aria-label={LITERALS.viewGrid}
+            onlyIcon={true}
+          >
+            <IconGrid aria-hidden={true} className={styles.icon} />
           </Button>
         </div>
       </div>

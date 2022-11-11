@@ -14,6 +14,8 @@ export const usePokemonList = () => {
   const INITIAL_OFFSET = 0;
   const DEBOUNCE_DELAY_MS = 500;
 
+  const queryClient = useQueryClient();
+
   const [viewFilter, setViewFilter] = React.useState<ViewFilter>("all");
   const [typeFilter, setTypeFilter] = React.useState("");
   const [search, setSearch] = React.useState("");
@@ -46,6 +48,29 @@ export const usePokemonList = () => {
       }
     );
 
+  const { mutate: onFavorite } = useMutation((pokemonId: Pokemon["id"]) => setFavorite(pokemonId), {
+    onSuccess: () => {
+      queryClient.invalidateQueries(pokemonsKeys.list(queryFilters));
+    },
+  });
+
+  const { mutate: onUnfavorite } = useMutation(
+    (pokemonId: Pokemon["id"]) => setUnfavorite(pokemonId),
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries(pokemonsKeys.list(queryFilters));
+      },
+    }
+  );
+
+  const handleFavoriteClick = (pokemonId: Pokemon["id"], isFavorite: boolean) => {
+    if (isFavorite) {
+      onUnfavorite(pokemonId);
+    } else {
+      onFavorite(pokemonId);
+    }
+  };
+
   const pokemons = React.useMemo(
     () => (data ? data.pages.flatMap((page) => page.items) : []),
     [data]
@@ -60,6 +85,7 @@ export const usePokemonList = () => {
     onSearchChange: setSearch,
     onTypeFilterChange: setTypeFilter,
     onViewFilterChange: setViewFilter,
+    onFavorite: handleFavoriteClick,
     pokemons,
     search,
     typeFilter,
@@ -78,36 +104,5 @@ export const usePokemonTypes = () => {
     pokemonTypes,
     isLoading,
     isError,
-  };
-};
-
-export const useFavorite = () => {
-  const queryClient = useQueryClient();
-
-  const { mutate: onFavorite } = useMutation((pokemonId: Pokemon["id"]) => setFavorite(pokemonId), {
-    onSettled: () => {
-      queryClient.invalidateQueries();
-    },
-  });
-
-  const { mutate: onUnfavorite } = useMutation(
-    (pokemonId: Pokemon["id"]) => setUnfavorite(pokemonId),
-    {
-      onSettled: () => {
-        queryClient.invalidateQueries();
-      },
-    }
-  );
-
-  const handleFavoriteClick = (pokemonId: Pokemon["id"], isFavorite: boolean) => {
-    if (isFavorite) {
-      onUnfavorite(pokemonId);
-    } else {
-      onFavorite(pokemonId);
-    }
-  };
-
-  return {
-    onFavorite: handleFavoriteClick,
   };
 };

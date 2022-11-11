@@ -18,3 +18,5 @@ export type QueryFilters = {
 export type ViewFilter = "all" | "favorites";
 
 export type TypeOption = SelectProps["options"][number];
+
+export type View = "list" | "grid";

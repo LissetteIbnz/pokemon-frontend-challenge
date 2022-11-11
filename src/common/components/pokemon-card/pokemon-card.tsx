@@ -7,6 +7,7 @@ export interface PokemonCardProps {
   className?: string;
   imageUrl: string;
   isFavorite: boolean;
+  isRow?: boolean;
   onClick: () => void;
   onFavorite: () => void;
   title: string;
@@ -21,12 +22,21 @@ export const PokemonCard = ({
   onFavorite,
   title,
   types,
+  isRow,
 }: PokemonCardProps) => {
   const hasTypes = types !== undefined;
 
   return (
-    <Card className={cx(styles.container, className)} onClick={onClick}>
-      <img loading="lazy" className={styles.media} alt={title} src={imageUrl} />
+    <Card
+      className={cx(styles.container, { [styles["container--row"]]: isRow }, className)}
+      onClick={onClick}
+    >
+      <img
+        loading="lazy"
+        className={cx(styles.media, { [styles["media--row"]]: isRow })}
+        alt={title}
+        src={imageUrl}
+      />
       <footer className={styles.footer}>
         <hgroup>
           <h2>{title}</h2>

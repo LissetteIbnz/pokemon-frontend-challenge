@@ -7,3 +7,8 @@ $card-width: 250px;
   grid-gap: 1rem;
   grid-template-columns: repeat(auto-fit, minmax($card-width, 1fr));
 }
+
+.list {
+  display: flex;
+  flex-direction: column;
+}

@@ -3,8 +3,8 @@ import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
 import { routes } from "core/router";
 import { PokemonListComponent } from "./pokemon-list.component";
-import { useFavorite, usePokemonList, usePokemonTypes } from "./pokemon-list.hook";
-import { Pokemon } from "./pokemon-list.vm";
+import { usePokemonList, usePokemonTypes } from "./pokemon-list.hook";
+import { Pokemon, View } from "./pokemon-list.vm";
 
 export const PokemonListContainer = () => {
   const navigate = useNavigate();
@@ -17,6 +17,7 @@ export const PokemonListContainer = () => {
     isError,
     isFetchingNextPage,
     isLoading,
+    onFavorite,
     onSearchChange,
     onTypeFilterChange,
     onViewFilterChange,
@@ -26,7 +27,7 @@ export const PokemonListContainer = () => {
     viewFilter,
   } = usePokemonList();
 
-  const { onFavorite } = useFavorite();
+  const [view, setView] = React.useState<View>("grid");
 
   React.useEffect(() => {
     if (inView) {
@@ -36,6 +37,10 @@ export const PokemonListContainer = () => {
 
   const handleNavigateDetails = (pokemonId: Pokemon["id"]) => {
     navigate(routes.detailsById(pokemonId));
+  };
+
+  const handleViewChange = (newView: View) => {
+    setView(newView);
   };
 
   if (isLoading) {
@@ -49,16 +54,18 @@ export const PokemonListContainer = () => {
   return (
     <>
       <PokemonListComponent
-        onPokemonClick={handleNavigateDetails}
-        onViewFilterChange={onViewFilterChange}
         onFavoriteClick={onFavorite}
+        onPokemonClick={handleNavigateDetails}
         onSearchChange={onSearchChange}
-        search={search}
-        pokemons={pokemons}
-        typeOptions={pokemonTypes}
         onTypeFilterChange={onTypeFilterChange}
+        onViewChange={handleViewChange}
+        onViewFilterChange={onViewFilterChange}
+        pokemons={pokemons}
+        search={search}
         typeFilter={typeFilter}
+        typeOptions={pokemonTypes}
         viewFilter={viewFilter}
+        view={view}
       />
 
       <div>
