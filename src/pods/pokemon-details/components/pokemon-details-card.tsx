@@ -1,5 +1,6 @@
+import * as React from "react";
 import { IconSound } from "assets/icons";
-import { Button, Card, HeartButton } from "common/components";
+import { AudioButton, Button, Card, HeartButton } from "common/components";
 import { PokemonDetails } from "../pokemon-details.vm";
 import styles from "./pokemon-details-card.module.scss";
 
@@ -20,9 +21,7 @@ export const PokemonDetailsCard = ({ onFavorite, pokemon }: PokemonDetailsCardPr
     <Card>
       <div className={styles["media-container"]}>
         <img alt={pokemon.name} className={styles.image} loading="lazy" src={pokemon.imageURL} />
-        <Button className={styles.sound} onlyIcon={true}>
-          <IconSound aria-hidden={true} />
-        </Button>
+        <AudioButton className={styles.sound} url={pokemon.soundURL} />
       </div>
       <footer className={styles.footer}>
         <hgroup className={styles.footer__description}>

@@ -1,3 +1,4 @@
+export * from "./audio-button";
 export * from "./button";
 export * from "./card";
 export * from "./group-buttons";
