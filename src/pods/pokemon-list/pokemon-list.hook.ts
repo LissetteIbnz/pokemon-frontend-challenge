@@ -32,7 +32,7 @@ export const usePokemonList = () => {
     useInfiniteQuery(
       pokemonsKeys.list(queryFilters),
       async ({ pageParam = INITIAL_OFFSET, queryKey }) => {
-        const [_, filters] = queryKey;
+        const filters = queryKey[1];
         const { type, search, isFavorite } = filters as QueryFilters;
         const response = await getPaginatedPokemons({
           offset: pageParam,

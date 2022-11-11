@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { QueryClientConfig } from "@tanstack/react-query";
 
 // ⛔️ Only use in the test utils ⛔️

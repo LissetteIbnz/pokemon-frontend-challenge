@@ -29,7 +29,7 @@ const setUnfavorite = async (pokemonId: PokemonDTO["id"]) => {
   return response;
 };
 
-const getTypes = async () => {
+const getTypes = () => {
   const path = "/pokemon-types";
   return http.get<string[]>(path);
 };

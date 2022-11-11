@@ -1,0 +1,146 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": [
+    "react",
+    "react-hooks",
+    "@typescript-eslint",
+    "jsx-a11y"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "rules": {
+    // JavaScript rules.
+    "arrow-parens": "warn",
+    "default-case-last": "warn",
+    "default-case": "error",
+    "dot-notation": "warn",
+    "eqeqeq": "error",
+    "implicit-arrow-linebreak": "off",
+    "max-params": [
+      "warn",
+      {
+        "max": 3
+      }
+    ],
+    "no-console": "warn",
+    "object-shorthand": [
+      "error",
+      "always"
+    ],
+    "no-duplicate-imports": "error",
+    "no-return-await": "error",
+    "no-var": "error",
+    "prefer-const": "warn",
+    "require-await": "error",
+    "camelcase": [
+      "error",
+      {
+        "properties": "always",
+        "ignoreDestructuring": true
+      }
+    ],
+    "no-restricted-syntax": [
+      "error",
+      {
+        "selector": "ImportDeclaration[source.value='react'][specifiers.0.type='ImportDefaultSpecifier']",
+        "message": "Default React import not allowed"
+      },
+      {
+        "selector": "ImportDeclaration[source.value='react'][specifiers.0.type='ImportSpecifier']",
+        "message": "Named React import not allowed"
+      }
+    ],
+    // TypeScript rules.
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "@typescript-eslint/ban-ts-comment": [
+      "error",
+      {
+        "ts-ignore": "allow-with-description",
+        "ts-expect-error": "allow-with-description"
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    // React rules.
+    "react/react-in-jsx-scope": "off",
+    "react/self-closing-comp": "warn",
+    "react/sort-prop-types": "warn",
+    "react/function-component-definition": [
+      "error",
+      {
+        "namedComponents": "arrow-function",
+        "unnamedComponents": "arrow-function",
+        "arrowFunctions": "always",
+        "functionComponents": "arrow-function"
+      }
+    ],
+    "react/no-unstable-nested-components": "error",
+    "react/jsx-sort-props": [
+      "warn",
+      {
+        "reservedFirst": true,
+        "shorthandFirst": true,
+        "callbacksLast": true
+      }
+    ],
+    // React Hooks rules.
+    "react-hooks/rules-of-hooks": "error", // Checks rules of Hooks
+    "react-hooks/exhaustive-deps": "warn", // Checks effect dependencies
+    // a11y rules.
+    "jsx-a11y/aria-role": "warn"
+  },
+  "overrides": [
+    {
+      "files": [
+        "*.tsx"
+      ],
+      "rules": {
+        "react/prop-types": "off"
+      }
+    },
+    {
+      "files": [
+        "*.spec.ts",
+        "*.spec.tsx"
+      ],
+      "rules": {
+        "no-magic-numbers": "off",
+        "react/display-name": "off"
+      }
+    },
+    {
+      "files": [
+        "*.stories.tsx"
+      ],
+      "rules": {
+        "no-console": "off",
+        "no-magic-numbers": "off",
+        "import/no-anonymous-default-export": "off"
+      }
+    }
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

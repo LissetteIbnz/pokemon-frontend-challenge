@@ -11,6 +11,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "format": "prettier src --write",
+    "linter": "eslint src --fix",
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "storybook": "start-storybook -p 6006 -s public",
