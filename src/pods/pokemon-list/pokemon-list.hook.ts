@@ -8,6 +8,7 @@ import {
   setFavorite,
   setUnfavorite,
 } from "./pokemon-list.api";
+import { favoriteUpdater } from "./pokemon-list.business";
 import {
   ViewFilter,
   QueryFilters,
@@ -59,23 +60,10 @@ export const usePokemonList = () => {
 
       const previousPokemons = queryClient.getQueryData(pokemonsKeys.list(queryFilters));
 
+      const isFavorite = true;
       queryClient.setQueryData<PokemonListInfiniteQueryResult>(
         pokemonsKeys.list(queryFilters),
-        (data) => {
-          if (data) {
-            return {
-              ...data,
-              pages: data.pages.map((page) => {
-                return {
-                  ...page,
-                  items: page.items.map((item) =>
-                    item.id === updatedPokemonId ? { ...item, isFavorite: true } : item
-                  ),
-                };
-              }),
-            };
-          }
-        }
+        (data) => favoriteUpdater(data, updatedPokemonId, isFavorite)
       );
 
       return { previousPokemons };
@@ -90,23 +78,10 @@ export const usePokemonList = () => {
 
         const previousPokemons = queryClient.getQueryData(pokemonsKeys.list(queryFilters));
 
+        const isFavorite = false;
         queryClient.setQueryData<PokemonListInfiniteQueryResult>(
           pokemonsKeys.list(queryFilters),
-          (data) => {
-            if (data) {
-              return {
-                ...data,
-                pages: data.pages.map((page) => {
-                  return {
-                    ...page,
-                    items: page.items.map((item) =>
-                      item.id === updatedPokemonId ? { ...item, isFavorite: false } : item
-                    ),
-                  };
-                }),
-              };
-            }
-          }
+          (data) => favoriteUpdater(data, updatedPokemonId, isFavorite)
         );
 
         return { previousPokemons };
