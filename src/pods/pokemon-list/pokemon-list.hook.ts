@@ -8,7 +8,13 @@ import {
   setFavorite,
   setUnfavorite,
 } from "./pokemon-list.api";
-import { ViewFilter, QueryFilters, Pokemon } from "./pokemon-list.vm";
+import { favoriteUpdater } from "./pokemon-list.business";
+import {
+  ViewFilter,
+  QueryFilters,
+  Pokemon,
+  PokemonListInfiniteQueryResult,
+} from "./pokemon-list.vm";
 
 export const usePokemonList = () => {
   const INITIAL_OFFSET = 0;
@@ -49,16 +55,36 @@ export const usePokemonList = () => {
     );
 
   const { mutate: onFavorite } = useMutation((pokemonId: Pokemon["id"]) => setFavorite(pokemonId), {
-    onSuccess: () => {
-      queryClient.invalidateQueries(pokemonsKeys.list(queryFilters));
+    onMutate: async (updatedPokemonId) => {
+      await queryClient.cancelQueries(pokemonsKeys.list(queryFilters));
+
+      const previousPokemons = queryClient.getQueryData(pokemonsKeys.list(queryFilters));
+
+      const isFavorite = true;
+      queryClient.setQueryData<PokemonListInfiniteQueryResult>(
+        pokemonsKeys.list(queryFilters),
+        (data) => favoriteUpdater(data, updatedPokemonId, isFavorite)
+      );
+
+      return { previousPokemons };
     },
   });
 
   const { mutate: onUnfavorite } = useMutation(
     (pokemonId: Pokemon["id"]) => setUnfavorite(pokemonId),
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries(pokemonsKeys.list(queryFilters));
+      onMutate: async (updatedPokemonId) => {
+        await queryClient.cancelQueries(pokemonsKeys.list(queryFilters));
+
+        const previousPokemons = queryClient.getQueryData(pokemonsKeys.list(queryFilters));
+
+        const isFavorite = false;
+        queryClient.setQueryData<PokemonListInfiniteQueryResult>(
+          pokemonsKeys.list(queryFilters),
+          (data) => favoriteUpdater(data, updatedPokemonId, isFavorite)
+        );
+
+        return { previousPokemons };
       },
     }
   );

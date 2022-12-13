@@ -20,3 +20,7 @@ export type ViewFilter = "all" | "favorites";
 export type TypeOption = SelectProps["options"][number];
 
 export type View = "list" | "grid";
+
+export type PokemonListInfiniteQueryResult = {
+  pages: Array<{ items: Pokemon[]; nextOffset: number }>;
+};

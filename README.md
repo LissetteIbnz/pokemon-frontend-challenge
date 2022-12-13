@@ -55,5 +55,5 @@ To tun test:
 Other implementations:
 
 - Lazy routes.
-- Optimistic UI with React Query (only in Pokemon Details page). Pending to implement it in Pokemon List page.
+- Optimistic UI with React Query.
 - Create a catalogue of components with Storybook.
