@@ -8,7 +8,12 @@ import {
   setFavorite,
   setUnfavorite,
 } from "./pokemon-list.api";
-import { ViewFilter, QueryFilters, Pokemon } from "./pokemon-list.vm";
+import {
+  ViewFilter,
+  QueryFilters,
+  Pokemon,
+  PokemonListInfiniteQueryResult,
+} from "./pokemon-list.vm";
 
 export const usePokemonList = () => {
   const INITIAL_OFFSET = 0;
@@ -49,16 +54,62 @@ export const usePokemonList = () => {
     );
 
   const { mutate: onFavorite } = useMutation((pokemonId: Pokemon["id"]) => setFavorite(pokemonId), {
-    onSuccess: () => {
-      queryClient.invalidateQueries(pokemonsKeys.list(queryFilters));
+    onMutate: async (updatedPokemonId) => {
+      await queryClient.cancelQueries(pokemonsKeys.list(queryFilters));
+
+      const previousPokemons = queryClient.getQueryData(pokemonsKeys.list(queryFilters));
+
+      queryClient.setQueryData<PokemonListInfiniteQueryResult>(
+        pokemonsKeys.list(queryFilters),
+        (data) => {
+          if (data) {
+            return {
+              ...data,
+              pages: data.pages.map((page) => {
+                return {
+                  ...page,
+                  items: page.items.map((item) =>
+                    item.id === updatedPokemonId ? { ...item, isFavorite: true } : item
+                  ),
+                };
+              }),
+            };
+          }
+        }
+      );
+
+      return { previousPokemons };
     },
   });
 
   const { mutate: onUnfavorite } = useMutation(
     (pokemonId: Pokemon["id"]) => setUnfavorite(pokemonId),
     {
-      onSuccess: () => {
-        queryClient.invalidateQueries(pokemonsKeys.list(queryFilters));
+      onMutate: async (updatedPokemonId) => {
+        await queryClient.cancelQueries(pokemonsKeys.list(queryFilters));
+
+        const previousPokemons = queryClient.getQueryData(pokemonsKeys.list(queryFilters));
+
+        queryClient.setQueryData<PokemonListInfiniteQueryResult>(
+          pokemonsKeys.list(queryFilters),
+          (data) => {
+            if (data) {
+              return {
+                ...data,
+                pages: data.pages.map((page) => {
+                  return {
+                    ...page,
+                    items: page.items.map((item) =>
+                      item.id === updatedPokemonId ? { ...item, isFavorite: false } : item
+                    ),
+                  };
+                }),
+              };
+            }
+          }
+        );
+
+        return { previousPokemons };
       },
     }
   );
